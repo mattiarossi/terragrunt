@@ -238,6 +238,10 @@ func runTerragrunt(terragruntOptions *options.TerragruntOptions) error {
 		return shell.RunTerraformCommand(terragruntOptions, terragruntOptions.TerraformCliArgs...)
 	}
 
+	if shouldRunHCLFmt(terragruntOptions) {
+		return runHCLFmt(terragruntOptions)
+	}
+
 	terragruntConfig, err := config.ReadTerragruntConfig(terragruntOptions)
 	if err != nil {
 		return err
@@ -279,10 +283,6 @@ func runTerragrunt(terragruntOptions *options.TerragruntOptions) error {
 		}
 		fmt.Fprintf(terragruntOptions.Writer, "%s\n", b)
 		return nil
-	}
-
-	if shouldRunHCLFmt(terragruntOptions) {
-		return runHCLFmt(terragruntOptions)
 	}
 
 	if err := checkFolderContainsTerraformCode(terragruntOptions); err != nil {
