@@ -43,6 +43,7 @@ var terragruntOnlyConfigs = []string{
 	"skip_bucket_ssencryption",
 	"skip_bucket_accesslogging",
 	"enable_lock_table_ssencryption",
+	"dynamodb_endpoint",
 }
 
 // A representation of the configuration options available for S3 remote state
@@ -58,7 +59,7 @@ type RemoteStateConfigS3 struct {
 	DynamoDBTable    string `mapstructure:"dynamodb_table"`
 	CredsFilename    string `mapstructure:"shared_credentials_file"`
 	S3ForcePathStyle bool   `mapstructure:"force_path_style"`
-	DynamoDBEndpoint string `mapstructure:"endpoint_dynamodb"`
+	DynamoDBEndpoint string `mapstructure:"dynamodb_endpoint"`
 }
 
 // Builds a session config for AWS related requests from the RemoteStateConfigS3 configuration
