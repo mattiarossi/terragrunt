@@ -20,6 +20,7 @@ type AwsSessionConfig struct {
 	RoleArn          string
 	CredsFilename    string
 	S3ForcePathStyle bool
+	CustomDynamoDBEndpoint string
 }
 
 // Returns an AWS session object for the given config region (required), profile name (optional), and IAM role to assume
@@ -33,7 +34,13 @@ func CreateAwsSession(config *AwsSessionConfig, terragruntOptions *options.Terra
 				SigningRegion: config.Region,
 			}, nil
 		}
-
+		if service == "dynamodb" && config.CustomDynamoDBEndpoint != "" {
+			return endpoints.ResolvedEndpoint{
+				URL:           config.CustomDynamoDBEndpoint,
+				SigningRegion: config.Region,
+			}, nil
+		}
+		
 		return defaultResolver.EndpointFor(service, region, optFns...)
 	}
 
