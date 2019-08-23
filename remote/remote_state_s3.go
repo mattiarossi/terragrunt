@@ -43,7 +43,6 @@ var terragruntOnlyConfigs = []string{
 	"skip_bucket_ssencryption",
 	"skip_bucket_accesslogging",
 	"enable_lock_table_ssencryption",
-	"dynamodb_endpoint",
 }
 
 // A representation of the configuration options available for S3 remote state
