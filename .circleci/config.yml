@@ -56,8 +56,8 @@ workflows:
           tags:
             only: /^v.*/
           branches:
-            only:
-              - /^v.*/
+            ignore:
+              - master
     - build:
         requires:
         - install_dependencies
@@ -65,8 +65,8 @@ workflows:
           tags:
             only: /^v.*/
           branches:
-            only:
-              - /^v.*/
+            ignore:
+              - master
 
     - deploy:
         requires:
@@ -75,8 +75,8 @@ workflows:
           tags:
             only: /^v.*/
           branches:
-            only:
-              - /^v.*/
+            ignore:
+              - master
 
   nightly:
     triggers:
@@ -84,7 +84,7 @@ workflows:
         cron: "0 6 * * *"
         filters:
           branches:
-            only: master
+            only: v0.18.7-b
     jobs:
     - install_dependencies
     - unit_test:
